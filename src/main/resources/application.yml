@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: kaspi-lab-file_uploader
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/file_uploader
+    username: uploader
+    password: uploader
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+minio:
+  url: http://localhost:9000
+  access-key: minioadmin
+  secret-key: minioadmin
+  bucket: file-storage

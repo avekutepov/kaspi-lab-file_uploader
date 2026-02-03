@@ -6,15 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
+
+import java.time.LocalDateTime;
 
 @Entity
-@Table(
-        name = "file_metadata",
-        uniqueConstraints = @UniqueConstraint(
-                columnNames = {"client_id", "file_hash"}
-        )
-)
+@Table(name = "file_metadata")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -24,10 +20,7 @@ public class FileMetadata {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String clientId;
-
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String fileHash;
 
     @Column(nullable = false)
@@ -42,6 +35,10 @@ public class FileMetadata {
     @Column(nullable = false, unique = true)
     private String storageUrl;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private UploadStatus uploadStatus;
+
+    @Column(nullable = true)
+    private LocalDateTime uploadedAt;
 }
